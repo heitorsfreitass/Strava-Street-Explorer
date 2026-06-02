@@ -21,4 +21,22 @@ class StravaService
 
         return $response->json();
     }
+
+    public function streams(User $user, int $activityId): array
+    {
+        $response = Http::withToken(
+            $user->strava_access_token
+        )->get(
+            "https://www.strava.com/api/v3/activities/{$activityId}/streams",
+            [
+                'keys' => 'latlng,distance',
+                'key_by_type' => true,
+            ]
+        );
+
+        dd(
+            $response->status(),
+            $response->json()
+        );
+    }
 }

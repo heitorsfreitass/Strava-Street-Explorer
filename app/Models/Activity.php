@@ -15,4 +15,9 @@ class Activity extends Model
         'moving_time',
         'started_at',
     ];
+
+    public function points()
+    {
+        return $this->hasMany(ActivityPoint::class);
+    }
 }

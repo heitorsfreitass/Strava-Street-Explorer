@@ -34,4 +34,22 @@ class StravaSyncController extends Controller
             'imported' => count($activities),
         ];
     }
+
+    public function testStream(
+        StravaService $strava
+    ) {
+
+        $activity = Activity::first();
+
+        $stream = $strava->streams(
+            auth()->user(),
+            $activity->strava_id
+        );
+
+        dd([
+            'name' => $activity->name,
+            'sport_type' => $activity->sport_type,
+            'strava_id' => $activity->strava_id,
+        ]);
+    }
 }
