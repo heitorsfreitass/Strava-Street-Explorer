@@ -5,7 +5,11 @@ use App\Http\Controllers\StravaAuthController;
 use App\Http\Controllers\StravaSyncController;
 
 Route::get('/', function () {
-    return view('welcome');
+    if (auth()->check()) {
+        return redirect('/dashboard');
+    }
+
+    return redirect('/auth/strava');
 });
 
 Route::get('/dashboard', function () {
